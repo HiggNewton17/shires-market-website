@@ -416,6 +416,41 @@ img {
     margin-right: 0.5rem;
 }
 
+.checkbox-dates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.date-option {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date-option:hover {
+    border-color: var(--hunter-green);
+    background-color: #f9f9f9;
+}
+
+.date-option input[type="checkbox"] {
+    margin-right: 0.75rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.date-option:has(input:checked) {
+    background-color: #e8f5e9;
+    border-color: var(--hunter-green);
+}
+
 .submit-button {
     width: 100%;
     background-color: var(--yellow);
@@ -617,5 +652,13 @@ img {
     
     .footer-content p {
         font-size: 0.875rem;
+    }
+    
+    .checkbox-dates {
+        grid-template-columns: 1fr;
+    }
+    
+    .date-option {
+        font-size: 0.9rem;
     }
 }

@@ -76,9 +76,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const formData = new FormData(this);
             const data = {};
+            const dates = [];
             
             for (let [key, value] of formData.entries()) {
-                data[key] = value;
+                if (key === 'dates') {
+                    dates.push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Add dates as a comma-separated string
+            if (dates.length > 0) {
+                data['interested_dates'] = dates.join(', ');
             }
             
             // Validate form
@@ -110,7 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({
                     access_key: '6a397225-6be5-4d0d-91d3-55b7ad2d287a',
                     subject: 'New Vendor Application - Shire\'s Farmers Market',
-                    from_name: `${formData['first-name']} ${formData['last-name']}`,
+                    from_name: 'Shire\'s Website - Vendor Submission',
+                    message: 'New interested vendor submission from the website!',
                     ...formData
                 })
             });
@@ -142,6 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!data[field] || data[field].trim() === '') {
                 return false;
             }
+        }
+        
+        // Check if at least one date is selected
+        if (!data['interested_dates']) {
+            showMessage('Please select at least one market date you\'re interested in.', 'error');
+            return false;
         }
         
         // Validate email
