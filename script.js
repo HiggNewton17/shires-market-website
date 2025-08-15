@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll to message
         formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    }
     
     function validateForm(data) {
         // Check required fields
