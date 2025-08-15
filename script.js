@@ -87,16 +87,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Simulate form submission (in production, this would send to a server)
-            // For now, we'll just show a success message
-            showMessage('Thank you for your application! We\'ll be in touch soon.', 'success');
-            
-            // Reset form after successful submission
-            vendorForm.reset();
-            
-            // Scroll to message
-            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Submit form using Web3Forms
+            submitForm(data);
         });
+    }
+    
+    async function submitForm(formData) {
+        const form = document.getElementById('vendor-form');
+        const submitButton = form.querySelector('.submit-button');
+        
+        // Disable submit button
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        
+        try {
+            // Web3Forms API endpoint
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: 'YOUR_ACCESS_KEY_HERE', // Replace with your Web3Forms access key
+                    subject: 'New Vendor Application - Shire\'s Farmers Market',
+                    from_name: `${formData['first-name']} ${formData['last-name']}`,
+                    ...formData
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showMessage('Thank you for your application! We\'ll be in touch soon.', 'success');
+                vendorForm.reset();
+            } else {
+                showMessage('There was an error submitting your application. Please try again.', 'error');
+            }
+        } catch (error) {
+            showMessage('There was an error submitting your application. Please try again.', 'error');
+        } finally {
+            // Re-enable submit button
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Application';
+        }
+        
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
     }
     
     function validateForm(data) {
