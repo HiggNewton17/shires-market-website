@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     access_key: '6a397225-6be5-4d0d-91d3-55b7ad2d287a',
                     subject: 'New Vendor Application - Shire\'s Farmers Market',
                     from_name: 'Shire\'s Website - Vendor Submission',
+                    replyto: formData.email,
                     message: 'New interested vendor submission from the website!',
                     ...formData
                 })
