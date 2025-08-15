@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    access_key: 'YOUR_ACCESS_KEY_HERE', // Replace with your Web3Forms access key
+                    access_key: '6a397225-6be5-4d0d-91d3-55b7ad2d287a',
                     subject: 'New Vendor Application - Shire\'s Farmers Market',
                     from_name: `${formData['first-name']} ${formData['last-name']}`,
                     ...formData
