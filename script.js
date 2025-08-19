@@ -102,17 +102,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Simple rate limiting
+    let lastSubmitTime = 0;
+    const submitCooldown = 5000; // 5 seconds between submissions
+    
+    // Obfuscated webhook parts
+    const h1 = 'https://hook.';
+    const h2 = 'us1.make.com/';
+    const h3 = 'dwm4fb8yn9d15s6zpi5sioysm2zfarfh';
+    
     async function submitForm(formData) {
         const form = document.getElementById('vendor-form');
         const submitButton = form.querySelector('.submit-button');
+        
+        // Check honeypot field
+        const honeypot = form.querySelector('input[name="website"]');
+        if (honeypot && honeypot.value !== '') {
+            // Bot detected - silently fail
+            console.log('Form validation failed');
+            return;
+        }
+        
+        // Additional check for completely empty submissions
+        const allValues = Object.values(formData).filter(v => v && v.toString().trim());
+        if (allValues.length < 5) {
+            showMessage('Please fill out all required fields', 'error');
+            return;
+        }
+        
+        // Rate limiting check
+        const currentTime = Date.now();
+        if (currentTime - lastSubmitTime < submitCooldown) {
+            showMessage('Please wait a few seconds before submitting again.', 'error');
+            return;
+        }
+        lastSubmitTime = currentTime;
+        
+        // Simple token validation (timestamp-based)
+        const token = btoa(Math.floor(Date.now() / 60000).toString()); // Changes every minute
         
         // Disable submit button
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
         
         try {
-            // Make.com webhook endpoint
-            const response = await fetch('https://hook.us1.make.com/dwm4fb8yn9d15s6zpi5sioysm2zfarfh', {
+            // Construct webhook URL
+            const webhookUrl = h1 + h2 + h3;
+            
+            const response = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({
                     timestamp: new Date().toISOString(),
                     form_type: 'vendor_application',
+                    validation_token: token,
                     first_name: formData['first-name'],
                     last_name: formData['last-name'],
                     email: formData.email,
@@ -153,10 +191,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function validateForm(data) {
-        // Check required fields
-        const requiredFields = ['first-name', 'last-name', 'email', 'phone', 'products'];
-        for (let field of requiredFields) {
-            if (!data[field] || data[field].trim() === '') {
+        // Check required fields with minimum length requirements
+        const requiredFields = {
+            'first-name': { min: 2, message: 'First name must be at least 2 characters' },
+            'last-name': { min: 2, message: 'Last name must be at least 2 characters' },
+            'email': { min: 5, message: 'Please enter a valid email address' },
+            'phone': { min: 10, message: 'Phone number must be at least 10 digits' },
+            'products': { min: 10, message: 'Please describe your products (at least 10 characters)' }
+        };
+        
+        for (let field in requiredFields) {
+            const value = data[field];
+            const requirement = requiredFields[field];
+            
+            // Check if field exists and is not just whitespace
+            if (!value || value.trim().length < requirement.min) {
+                showMessage(requirement.message, 'error');
                 return false;
             }
         }
@@ -167,20 +217,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         
-        // Validate email
+        // Validate email format and not just spaces
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
+        if (!emailRegex.test(data.email.trim())) {
+            showMessage('Please enter a valid email address', 'error');
             return false;
         }
         
-        // Validate phone (basic validation)
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-        if (!phoneRegex.test(data.phone)) {
+        // Validate phone (must have at least 10 digits)
+        const phoneDigits = data.phone.replace(/\D/g, '');
+        if (phoneDigits.length < 10) {
+            showMessage('Please enter a valid phone number with at least 10 digits', 'error');
+            return false;
+        }
+        
+        // Check if booth type is selected
+        if (!data['booth-type']) {
+            showMessage('Please select a booth space preference', 'error');
             return false;
         }
         
         // Check if terms are accepted
         if (!data.terms) {
+            showMessage('Please accept the terms and conditions', 'error');
             return false;
         }
         

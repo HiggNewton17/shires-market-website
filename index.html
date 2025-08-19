@@ -139,6 +139,8 @@
                 <h2>Become a Vendor</h2>
                 <p class="signup-intro">Ready to join Shire's Farmers Market? Fill out the form below and we'll be in touch!</p>
                 <form id="vendor-form" class="vendor-form">
+                    <!-- Honeypot field - hidden from real users -->
+                    <input type="text" name="website" style="position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="first-name">First Name *</label>
