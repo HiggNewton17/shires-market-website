@@ -111,25 +111,29 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Sending...';
         
         try {
-            // Web3Forms API endpoint
-            const response = await fetch('https://api.web3forms.com/submit', {
+            // Make.com webhook endpoint
+            const response = await fetch('https://hook.us1.make.com/dwm4fb8yn9d15s6zpi5sioysm2zfarfh', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    access_key: '6a397225-6be5-4d0d-91d3-55b7ad2d287a',
-                    subject: 'New Vendor Application - Shire\'s Farmers Market',
-                    from_name: 'Shire\'s Website - Vendor Submission',
-                    replyto: formData.email,
-                    message: 'New interested vendor submission from the website!',
-                    ...formData
+                    timestamp: new Date().toISOString(),
+                    form_type: 'vendor_application',
+                    first_name: formData['first-name'],
+                    last_name: formData['last-name'],
+                    email: formData.email,
+                    phone: formData.phone,
+                    business_name: formData['business-name'] || '',
+                    products: formData.products,
+                    interested_dates: formData.interested_dates,
+                    previous_experience: formData.experience || '',
+                    booth_type: formData['booth-type'],
+                    terms_accepted: formData.terms
                 })
             });
             
-            const result = await response.json();
-            
-            if (result.success) {
+            if (response.ok) {
                 showMessage('Thank you for your application! We\'ll be in touch soon.', 'success');
                 vendorForm.reset();
             } else {
@@ -137,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             showMessage('There was an error submitting your application. Please try again.', 'error');
+            console.error('Form submission error:', error);
         } finally {
             // Re-enable submit button
             submitButton.disabled = false;
