@@ -31,3 +31,9 @@ npm-debug.log*
 
 # Vercel
 .vercel
+
+# Local project files
+.claude/
+assets/
+project-brief/
+FORM_SETUP.md
