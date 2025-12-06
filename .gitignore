@@ -34,6 +34,5 @@ npm-debug.log*
 
 # Local project files
 .claude/
-assets/
 project-brief/
 FORM_SETUP.md
