@@ -4,6 +4,7 @@ node_modules/
 # Production build
 dist/
 build/
+_site/
 
 # Environment variables
 .env

@@ -1,0 +1,93 @@
+backend:
+  name: github
+  repo: HiggNewton17/shires-market-website
+  branch: main
+  base_url: https://shiresfarmersmarket.com
+
+site_url: https://shiresfarmersmarket.com
+display_url: https://shiresfarmersmarket.com
+media_folder: "src/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "site_content"
+    label: "Website Content"
+    description: "Edit the words on the website. Changes go live a minute or two after you click Publish."
+    editor:
+      preview: false
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "src/_data/site.json"
+        description: "All the editable text on the website."
+        fields:
+          - { label: "Season Banner", name: "announcement", widget: "string", hint: "The green banner near the top of the page." }
+          - label: "Top of Page (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Small Tagline", name: "tagline", widget: "string" }
+              - { label: "Headline Line 1", name: "heading_top", widget: "string" }
+              - { label: "Headline Line 2 (highlighted)", name: "heading_highlight", widget: "string" }
+              - { label: "Schedule Line", name: "schedule", widget: "string" }
+              - { label: "Location Line", name: "location", widget: "string" }
+              - { label: "Button Text", name: "cta_label", widget: "string" }
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "First Paragraph", name: "intro", widget: "text" }
+              - { label: "Second Paragraph", name: "body", widget: "text" }
+              - { label: "Features Heading", name: "features_heading", widget: "string" }
+              - label: "Features List"
+                name: "features"
+                widget: "list"
+                field: { label: "Feature", name: "feature", widget: "string" }
+          - label: "For Vendors Section"
+            name: "vendors"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Line", name: "intro", widget: "string" }
+              - label: "Benefit Cards"
+                name: "cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Card Title", name: "title", widget: "string" }
+                  - { label: "Card Text", name: "text", widget: "text" }
+          - label: "Sign-Up Section"
+            name: "signup"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Booth Options"
+                name: "booth_options"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Code (no spaces)", name: "value", widget: "string", hint: "Short code saved with the application, e.g. canopy" }
+                  - { label: "Shown to Vendor", name: "label", widget: "string" }
+          - label: "Market Dates"
+            name: "market_dates"
+            widget: "list"
+            label_singular: "Date"
+            summary: "{{fields.label}}"
+            hint: "The Saturdays vendors can pick on the form. Add or remove as the season changes."
+            fields:
+              - { label: "Form Value", name: "value", widget: "string", hint: "Short date like 5/23" }
+              - { label: "Shown on Form", name: "label", widget: "string", hint: "Friendly date like May 23" }
+          - label: "Contact Section"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Address", name: "address", widget: "text", hint: "Each new line becomes a line break on the site." }
+              - { label: "Market Hours", name: "hours", widget: "text" }
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Facebook URL", name: "facebook_url", widget: "string" }
+              - { label: "Google Maps URL", name: "maps_url", widget: "string" }

@@ -6,11 +6,11 @@
     <title>Shire's Farmers Market - Coal City, IN</title>
     <meta name="description" content="Join us at Shire's Farmers Market every Saturday 1:00 PM - 5:00 PM! Fresh produce, local goods, and community gathering in Coal City, Indiana.">
     <meta name="google-site-verification" content="s8p6IDsvTSMuzO3tSru7tIT4SVzfXLb_qQpQ3bmD5rA" />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/shires-favicon.svg">
     <link rel="alternate icon" href="assets/images/shires-favicon.ico">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shiresfarmersmarket.com/">
@@ -18,22 +18,22 @@
     <meta property="og:description" content="Join us at Shire's Farmers Market every Saturday 1:00 PM - 5:00 PM! Fresh produce, local goods, and community gathering in Coal City, Indiana.">
     <meta property="og:image" content="https://shiresfarmersmarket.com/assets/images/shires-open-graph.jpg">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://shiresfarmersmarket.com/">
     <meta property="twitter:title" content="Shire's Farmers Market - Every Saturday!">
     <meta property="twitter:description" content="Join us at Shire's Farmers Market every Saturday 1:00 PM - 5:00 PM! Fresh produce, local goods, and community gathering in Coal City, Indiana.">
     <meta property="twitter:image" content="https://shiresfarmersmarket.com/assets/images/shires-open-graph.jpg">
-    
+
     <!-- Apple Touch Icon / Webclip -->
     <link rel="apple-touch-icon" href="assets/images/shires-webclip.png">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -67,13 +67,14 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <p class="tagline">Hear ye, hear ye!</p>
-                <h1>Shire's Farmers Market<br><span>Every Saturday!</span></h1>
+                <p class="tagline">{{ site.hero.tagline }}</p>
+                <p class="season-banner">{{ site.announcement }}</p>
+                <h1>{{ site.hero.heading_top }}<br><span>{{ site.hero.heading_highlight }}</span></h1>
                 <div class="hero-info">
-                    <p class="date-time">Every Saturday • 1:00 PM - 5:00 PM</p>
-                    <p class="location">3939 Beech Church Road, Coal City, IN 47427</p>
+                    <p class="date-time">{{ site.hero.schedule }}</p>
+                    <p class="location">{{ site.hero.location }}</p>
                 </div>
-                <a href="#signup" class="cta-button">Become a Vendor</a>
+                <a href="#signup" class="cta-button">{{ site.hero.cta_label }}</a>
             </div>
             <div class="hero-image">
                 <img src="assets/images/market-produce.png" alt="Fresh farmers market produce">
@@ -86,16 +87,16 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>About the Market</h2>
-                    <p>Shire's Farmers Market is open every Saturday from 1:00 PM – 5:00 PM. Located at 3939 Beech Church Road, Coal City, IN 47427 (corner of State Road 157 and Beech Church Road).</p>
-                    <p>Join us every Saturday for fresh, locally grown produce and homemade goods. Experience the best of Coal City's agricultural community!</p>
+                    <h2>{{ site.about.heading }}</h2>
+                    <p>{{ site.about.intro }}</p>
+                    <p>{{ site.about.body }}</p>
                     <div class="features">
                         <div class="feature">
-                            <h3>Market Features</h3>
+                            <h3>{{ site.about.features_heading }}</h3>
                             <ul>
-                                <li>Meet local farmers and artisans</li>
-                                <li>Family-friendly activities</li>
-                                <li>Located on the old highschool property</li>
+                                {% for feature in site.about.features %}
+                                <li>{{ feature }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -110,24 +111,16 @@
     <!-- Vendors Section -->
     <section id="vendors" class="vendors">
         <div class="container">
-            <h2>For Vendors</h2>
-            <p class="vendors-intro">Join our community of local farmers and artisans!</p>
+            <h2>{{ site.vendors.heading }}</h2>
+            <p class="vendors-intro">{{ site.vendors.intro }}</p>
             <div class="vendor-benefits">
+                {% for card in site.vendors.cards %}
                 <div class="benefit-card">
-                    <img src="assets/images/small-farmers-market-bag-icon.svg" alt="Vendor booth icon">
-                    <h3>Booth Space Options</h3>
-                    <p>$5 canopy-covered space or $15 shelter stalls (12' x 12', 10 available weekly)</p>
+                    <img src="assets/images/small-farmers-market-bag-icon.svg" alt="{{ card.title }}">
+                    <h3>{{ card.title }}</h3>
+                    <p>{{ card.text }}</p>
                 </div>
-                <div class="benefit-card">
-                    <img src="assets/images/small-farmers-market-bag-icon.svg" alt="Covered booth icon">
-                    <h3>Covered Vendor Booths</h3>
-                    <p>Beat the heat in our new, covered, three-sided "saltbox" shed</p>
-                </div>
-                <div class="benefit-card">
-                    <img src="assets/images/small-farmers-market-bag-icon.svg" alt="Community icon">
-                    <h3>Community Focus</h3>
-                    <p>Promoting healthy homegrown produce and canned goods to our local community</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -136,8 +129,8 @@
     <section id="signup" class="signup">
         <div class="container">
             <div class="signup-content">
-                <h2>Become a Vendor</h2>
-                <p class="signup-intro">Ready to join Shire's Farmers Market? Fill out the form below and we'll be in touch! Craft vendors are welcome.</p>
+                <h2>{{ site.signup.heading }}</h2>
+                <p class="signup-intro">{{ site.signup.intro }}</p>
                 <form id="vendor-form" class="vendor-form">
                     <!-- Honeypot field - hidden from real users -->
                     <input type="text" name="website" style="position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
@@ -176,31 +169,22 @@
                     <div class="form-group">
                         <label>Booth Space Preference *</label>
                         <div class="radio-group">
+                            {% for option in site.signup.booth_options %}
                             <label class="radio-option">
-                                <input type="radio" name="booth-type" value="canopy" required>
-                                $5 - Canopy-covered space
+                                <input type="radio" name="booth-type" value="{{ option.value }}" required>
+                                {{ option.label }}
                             </label>
-                            <label class="radio-option">
-                                <input type="radio" name="booth-type" value="shelter" required>
-                                $15 - Shelter stall (12' x 12', limited to 10 per week)
-                            </label>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="interested-dates">Which market dates are you interested in? *</label>
                         <div class="checkbox-dates">
+                            {% for date in site.market_dates %}
                             <label class="date-option">
-                                <input type="checkbox" name="dates" value="10/4"> October 4
+                                <input type="checkbox" name="dates" value="{{ date.value }}"> {{ date.label }}
                             </label>
-                            <label class="date-option">
-                                <input type="checkbox" name="dates" value="10/11"> October 11
-                            </label>
-                            <label class="date-option">
-                                <input type="checkbox" name="dates" value="10/18"> October 18
-                            </label>
-                            <label class="date-option">
-                                <input type="checkbox" name="dates" value="10/25"> October 25
-                            </label>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="form-group checkbox-group">
@@ -219,23 +203,23 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Come one, come all!</h2>
-            <p class="contact-tagline">Make Coal City Great Again!</p>
+            <h2>{{ site.contact.heading }}</h2>
+            <p class="contact-tagline">{{ site.contact.tagline }}</p>
             <div class="contact-info">
                 <div class="contact-item">
                     <h3>Location</h3>
-                    <p>3939 Beech Church Road<br>Coal City, IN 47427<br>(Corner of State Road 157 and Beech Church Road)</p>
+                    <p>{{ site.contact.address | nl2br | safe }}</p>
                 </div>
                 <div class="contact-item">
                     <h3>Market Hours</h3>
-                    <p>Every Saturday<br>1:00 PM - 5:00 PM</p>
+                    <p>{{ site.contact.hours | nl2br | safe }}</p>
                 </div>
                 <div class="contact-item">
                     <h3>Get in Touch</h3>
-                    <p>Phone: <a href="tel:812-859-4266">812-859-4266</a><br>
-                    Email: <a href="mailto:ShiresFarmersMarket@proton.me">ShiresFarmersMarket@proton.me</a><br>
-                    Facebook: <a href="https://www.facebook.com/people/Shires-Farmers-Market-Coal-City/61579419840637/" target="_blank" rel="noopener noreferrer">Visit our page</a><br>
-                    <a href="https://maps.app.goo.gl/2Si3XMWXhFbCV4YL7" target="_blank" rel="noopener noreferrer" class="maps-link">📍 View on Maps</a></p>
+                    <p>Phone: <a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>
+                    Email: <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a><br>
+                    Facebook: <a href="{{ site.contact.facebook_url }}" target="_blank" rel="noopener noreferrer">Visit our page</a><br>
+                    <a href="{{ site.contact.maps_url }}" target="_blank" rel="noopener noreferrer" class="maps-link">📍 View on Maps</a></p>
                 </div>
             </div>
         </div>
@@ -245,14 +229,14 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Shire's Farmers Market. All rights reserved.</p>
+                <p>&copy; <span id="copyright-year">2026</span> Shire's Farmers Market. All rights reserved.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/people/Shires-Farmers-Market-Coal-City/61579419840637/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <a href="{{ site.contact.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </a>
-                    <a href="https://maps.app.goo.gl/2Si3XMWXhFbCV4YL7" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+                    <a href="{{ site.contact.maps_url }}" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C7.31 0 3.5 3.81 3.5 8.5c0 6.5 8.5 15.5 8.5 15.5s8.5-9 8.5-15.5C20.5 3.81 16.69 0 12 0zm0 12c-1.93 0-3.5-1.57-3.5-3.5S10.07 5 12 5s3.5 1.57 3.5 3.5S13.93 12 12 12z"/>
                         </svg>

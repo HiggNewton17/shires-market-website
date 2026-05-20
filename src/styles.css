@@ -184,6 +184,17 @@ img {
     margin-bottom: 0.5rem;
 }
 
+.season-banner {
+    display: inline-block;
+    background-color: var(--hunter-green);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
 .hero h1 {
     color: var(--dark);
     margin-bottom: 1.5rem;

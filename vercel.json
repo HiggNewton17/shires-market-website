@@ -1,12 +1,8 @@
 {
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "status": 404,
-      "dest": "/404.html"
-    }
+  "buildCommand": "npm run build",
+  "outputDirectory": "_site",
+  "rewrites": [
+    { "source": "/auth", "destination": "/api/auth" },
+    { "source": "/callback", "destination": "/api/callback" }
   ]
 }
