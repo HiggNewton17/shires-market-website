@@ -2,10 +2,10 @@ backend:
   name: github
   repo: HiggNewton17/shires-market-website
   branch: main
-  base_url: https://shiresfarmersmarket.com
+  base_url: https://www.shiresfarmersmarket.com
 
-site_url: https://shiresfarmersmarket.com
-display_url: https://shiresfarmersmarket.com
+site_url: https://www.shiresfarmersmarket.com
+display_url: https://www.shiresfarmersmarket.com
 media_folder: "src/assets/images/uploads"
 public_folder: "/assets/images/uploads"
 

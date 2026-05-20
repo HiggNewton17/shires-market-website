@@ -19,8 +19,8 @@ These steps are done once in the GitHub and Vercel dashboards. No secrets live i
    (or visit https://github.com/settings/developers)
 2. Fill in:
    - **Application name:** `Shire's Market CMS` (any name)
-   - **Homepage URL:** `https://shiresfarmersmarket.com`
-   - **Authorization callback URL:** `https://shiresfarmersmarket.com/callback`
+   - **Homepage URL:** `https://www.shiresfarmersmarket.com`
+   - **Authorization callback URL:** `https://www.shiresfarmersmarket.com/callback`
      ⚠️ This must be exact. It must match your production domain + `/callback`.
 3. Click **Register application**.
 4. Copy the **Client ID**, then click **Generate a new client secret** and copy the secret.
@@ -41,7 +41,7 @@ These steps are done once in the GitHub and Vercel dashboards. No secrets live i
 ### 4. Deploy
 Commit and push these changes. Vercel runs the Eleventy build and deploys. The editor is then live at:
 
-**https://shiresfarmersmarket.com/admin**
+**https://www.shiresfarmersmarket.com/admin**
 
 > If your production domain is different, update `base_url` in `src/admin/config.yml` and the OAuth App callback URL to match.
 
@@ -49,7 +49,7 @@ Commit and push these changes. Vercel runs the Eleventy build and deploys. The e
 
 ## Part 2 — How to edit the site (for the market team)
 
-1. Go to **https://shiresfarmersmarket.com/admin**
+1. Go to **https://www.shiresfarmersmarket.com/admin**
 2. Click **Login with GitHub** and approve access (first time only).
 3. Click **Website Content → Home Page**.
 4. Edit any of the labeled fields:
@@ -88,7 +88,7 @@ npm run build    # production build into _site/
 
 ## Troubleshooting
 
-- **Login popup closes without signing in** — confirm `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` are set in Vercel and that you redeployed; confirm the OAuth App callback URL is exactly `https://shiresfarmersmarket.com/callback`.
+- **Login popup closes without signing in** — confirm `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` are set in Vercel and that you redeployed; confirm the OAuth App callback URL is exactly `https://www.shiresfarmersmarket.com/callback`.
 - **"Not authorized" / can't save** — the GitHub user must be a repo collaborator with Write access.
 - **Changes not showing** — wait 1–2 minutes for Vercel to rebuild, then hard-refresh.
 
