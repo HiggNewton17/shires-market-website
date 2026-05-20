@@ -11,7 +11,7 @@
   "about": {
     "heading": "About the Market",
     "intro": "Shire's Farmers Market is open every Saturday from 1:00 PM – 5:00 PM. Located at 3939 Beech Church Road, Coal City, IN 47427 (corner of State Road 157 and Beech Church Road).",
-    "body": "Our 2026 season is officially underway — opening day was Saturday, May 9th! Join us every Saturday for fresh, locally grown produce and homemade goods. Experience the best of Coal City's agricultural community!",
+    "body": "Our 2026 season is officially underway: opening day was Saturday, May 9th! Join us every Saturday for fresh, locally grown produce and homemade goods. Experience the best of Coal City's agricultural and artisan community.",
     "features_heading": "Market Features",
     "features": [
       "Meet local farmers and artisans",
@@ -41,23 +41,65 @@
     "heading": "Become a Vendor",
     "intro": "Ready to join Shire's Farmers Market? Fill out the form below and we'll be in touch! Craft vendors are welcome.",
     "booth_options": [
-      { "value": "canopy", "label": "$5 - Canopy-covered space" },
-      { "value": "shelter", "label": "$15 - Shelter stall (12' x 12', limited to 10 per week)" }
+      {
+        "value": "canopy",
+        "label": "$5 - Canopy-covered space"
+      },
+      {
+        "value": "shelter",
+        "label": "$15 - Shelter stall (12' x 12', limited to 10 per week)"
+      }
     ]
   },
   "market_dates": [
-    { "value": "5/23", "label": "May 23" },
-    { "value": "5/30", "label": "May 30" },
-    { "value": "6/6", "label": "June 6" },
-    { "value": "6/13", "label": "June 13" },
-    { "value": "6/20", "label": "June 20" },
-    { "value": "6/27", "label": "June 27" },
-    { "value": "7/4", "label": "July 4" },
-    { "value": "7/11", "label": "July 11" },
-    { "value": "7/18", "label": "July 18" },
-    { "value": "7/25", "label": "July 25" },
-    { "value": "8/1", "label": "August 1" },
-    { "value": "8/8", "label": "August 8" }
+    {
+      "value": "5/23",
+      "label": "May 23"
+    },
+    {
+      "value": "5/30",
+      "label": "May 30"
+    },
+    {
+      "value": "6/6",
+      "label": "June 6"
+    },
+    {
+      "value": "6/13",
+      "label": "June 13"
+    },
+    {
+      "value": "6/20",
+      "label": "June 20"
+    },
+    {
+      "value": "6/27",
+      "label": "June 27"
+    },
+    {
+      "value": "7/4",
+      "label": "July 4"
+    },
+    {
+      "value": "7/11",
+      "label": "July 11"
+    },
+    {
+      "value": "7/18",
+      "label": "July 18"
+    },
+    {
+      "value": "7/25",
+      "label": "July 25"
+    },
+    {
+      "value": "8/1",
+      "label": "August 1"
+    },
+    {
+      "value": "8/8",
+      "label": "August 8"
+    }
   ],
   "contact": {
     "heading": "Come one, come all!",
