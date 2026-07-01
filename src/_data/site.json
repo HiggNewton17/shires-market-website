@@ -53,30 +53,6 @@
   },
   "market_dates": [
     {
-      "value": "5/23",
-      "label": "May 23"
-    },
-    {
-      "value": "5/30",
-      "label": "May 30"
-    },
-    {
-      "value": "6/6",
-      "label": "June 6"
-    },
-    {
-      "value": "6/13",
-      "label": "June 13"
-    },
-    {
-      "value": "6/20",
-      "label": "June 20"
-    },
-    {
-      "value": "6/27",
-      "label": "June 27"
-    },
-    {
       "value": "7/4",
       "label": "July 4"
     },
@@ -99,6 +75,22 @@
     {
       "value": "8/8",
       "label": "August 8"
+    },
+    {
+      "value": "8/15",
+      "label": "August 15"
+    },
+    {
+      "value": "8/22",
+      "label": "August 22"
+    },
+    {
+      "value": "8/29",
+      "label": "August 29"
+    },
+    {
+      "value": "9/5",
+      "label": "September 5"
     }
   ],
   "contact": {
