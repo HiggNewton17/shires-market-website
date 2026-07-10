@@ -43,19 +43,15 @@
     "booth_options": [
       {
         "value": "canopy",
-        "label": "$5 - Canopy-covered space"
+        "label": "$FREE - Canopy-covered space"
       },
       {
         "value": "shelter",
-        "label": "$15 - Shelter stall (12' x 12', limited to 10 per week)"
+        "label": "$FREE - Shelter stall (12' x 12', limited to 10 per week)"
       }
     ]
   },
   "market_dates": [
-    {
-      "value": "7/4",
-      "label": "July 4"
-    },
     {
       "value": "7/11",
       "label": "July 11"
