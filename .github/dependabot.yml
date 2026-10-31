@@ -1,0 +1,61 @@
+# Dependabot: grouped weekly dependency PRs plus security fixes.
+# HWS standard config, from hws-starter (routine: hws-starter docs/dependency-updates.md).
+#
+# Before merging any Dependabot PR: check out its branch, `npm ci`, `npm run build`,
+# `npm audit --omit=dev`. A `payload` group PR also needs
+# `npx payload migrate:create --skip-empty` committed on the branch (hws-starter ops doc §7).
+# On Vercel, merging to main IS the production deploy: check the PR preview URL first.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Indiana/Indianapolis
+    # Wait 5 days after a release before proposing it, so a hijacked npm release is
+    # usually caught and pulled first. Security fixes ignore this wait.
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: deps
+    # Major versions are planned work, not a Monday PR. If a security fix ever needs a
+    # major bump, the Dependabot alert still fires: do that upgrade by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    # First matching group wins, so the framework groups come before the catch-all.
+    groups:
+      payload:
+        patterns: ["payload", "@payloadcms/*"]
+      next:
+        patterns: ["next", "@next/*", "eslint-config-next"]
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+      payload-security:
+        applies-to: security-updates
+        patterns: ["payload", "@payloadcms/*"]
+      next-security:
+        applies-to: security-updates
+        patterns: ["next", "@next/*", "eslint-config-next"]
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Indiana/Indianapolis
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns: ["*"]
