@@ -375,6 +375,23 @@ img {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* The form's hidden spam trap. Clipped, not display: none, which bots skip. The
+   input stays under 10px wide because Bitwarden reads that as hidden and leaves
+   it alone. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.sr-only input {
+    width: 1px;
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
