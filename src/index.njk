@@ -132,8 +132,11 @@
                 <h2>{{ site.signup.heading }}</h2>
                 <p class="signup-intro">{{ site.signup.intro }}</p>
                 <form id="vendor-form" class="vendor-form">
-                    <!-- Honeypot field - hidden from real users -->
-                    <input type="text" name="website" style="position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
+                    <!-- Spam trap, hidden from real users. Filling it never stops a submission: see submitForm in script.js -->
+                    <div class="sr-only" aria-hidden="true" inert>
+                        <label for="favorite-color">Favorite color</label>
+                        <input type="text" id="favorite-color" name="favorite_color" tabindex="-1" autocomplete="shires-trap" data-1p-ignore="true" data-lpignore="true" data-form-type="other">
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="first-name">First Name *</label>

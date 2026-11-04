@@ -121,14 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('vendor-form');
         const submitButton = form.querySelector('.submit-button');
         
-        // Check honeypot field
-        const honeypot = form.querySelector('input[name="website"]');
-        if (honeypot && honeypot.value !== '') {
-            // Bot detected - silently fail
-            console.log('Form validation failed');
-            return;
-        }
-        
         // Additional check for completely empty submissions
         const allValues = Object.values(formData).filter(v => v && v.toString().trim());
         if (allValues.length < 5) {
@@ -146,6 +138,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Simple token validation (timestamp-based)
         const token = btoa(Math.floor(Date.now() / 60000).toString()); // Changes every minute
+        
+        // The spam trap decides nothing. Autofill or a password manager can fill it
+        // for a real person, who can neither see it nor clear it, so a filled trap
+        // goes through the same checks and out to Make like any other application.
+        // It only adds trap_filled to the payload and writes one log line. The
+        // value itself is never sent or logged.
+        const trapFilled = Boolean(formData.favorite_color);
+        if (trapFilled) {
+            console.info(JSON.stringify({ tag: 'form-flag', form: 'vendor-application', reason: 'honeypot' }));
+        }
         
         // Disable submit button
         submitButton.disabled = true;
@@ -173,7 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     interested_dates: formData.interested_dates,
                     previous_experience: formData.experience || '',
                     booth_type: formData['booth-type'],
-                    terms_accepted: formData.terms
+                    terms_accepted: formData.terms,
+                    trap_filled: trapFilled || undefined
                 })
             });
             
